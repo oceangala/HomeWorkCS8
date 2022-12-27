@@ -350,8 +350,10 @@ int[,] FillSpiralArray(int size)
         }
 
         count++;
-        //Console.WriteLine(count);
+      
+        
     }
+    if(size%2 != 0) array[size/2, size/2] = start;
     return array;
 }
 
@@ -370,6 +372,6 @@ void Print2dArray(int[,] array)
     Console.WriteLine();
 }
 
-int size = 5; // Любое четное число > 0
+int size = 4; // или любой другой размер>0
 
 Print2dArray(FillSpiralArray(size));
