@@ -158,78 +158,81 @@
 
 
 
-// // Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
-// // Например, даны 2 матрицы:
-// // 2 4 | 3 4
-// // 3 2 | 3 3
-// // Результирующая матрица будет:
-// // 18 20
-// // 15 18
+// Задача 58: Задайте две матрицы. Напишите программу, которая будет находить произведение двух матриц.
+// Например, даны 2 матрицы:
+// 2 4 | 3 4
+// 3 2 | 3 3
+// Результирующая матрица будет:
+// 18 20
+// 15 18
 
-// int[,] Fill2dArray(int rows, int cols, int min, int max)
-// {
-//     int[,] array = new int[rows, cols];
-//     for (int i = 0; i < rows; i++)
-//     {
-//         for (int j = 0; j < cols; j++)
-//         {
-//             array[i, j] = new Random().Next(min, max + 1);
-//         }
-//     }
-//     return array;
-// }
-
-
-// void Print2dArray(int[,] array)
-// {
-//     for (int i = 0; i < array.GetLength(0); i++)
-//     {
-//         for (int j = 0; j < array.GetLength(1); j++)
-//         {
-//             Console.Write($"{array[i, j]} ");
-//         }
-//         Console.WriteLine();
-//     }
-//     Console.WriteLine();
-// }
+int[,] Fill2dArray(int size, int min, int max)
+{
+    int[,] array = new int[size, size];
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            array[i, j] = new Random().Next(min, max + 1);
+        }
+    }
+    return array;
+}
 
 
-// int[,] MultiplyMatrix(int[,] ar1, int[,] ar2)
-// {
-//     int[,] result = new int[ar1.GetLength(1), ar1.GetLength(1)];
-
-//     for (int i = 0; i < ar1.GetLength(0); i++)
-//     {   
-        
-//         for (int j = 0; j < ar1.GetLength(1); j++)
-//         {
-//             result[i,j] = result[i,j]+ar1[i,j]*ar2[j,i];
-//         }
-        
-//     }
-//     return result;
-// }
+void Print2dArray(int[,] array)
+{
+    for (int i = 0; i < array.GetLength(0); i++)
+    {
+        for (int j = 0; j < array.GetLength(1); j++)
+        {
+            Console.Write($"{array[i, j]} ");
+        }
+        Console.WriteLine();
+    }
+    Console.WriteLine();
+}
 
 
-// int min = 1;
-// int max = 6;
+int[,] MultiplyMatrix(int[,] ar1, int[,] ar2)
+{
+    int[,] result = new int[ar1.GetLength(1), ar2.GetLength(1)];
 
-// Console.Write("Enter number of rows for the 1st matrix: ");
-// int rows1 = Convert.ToInt16(Console.ReadLine());
-// Console.Write("Enter number of columns for the 1st matrix: ");
-// int cols1 = Convert.ToInt16(Console.ReadLine());
+    
+    for (int i = 0; i < ar1.GetLength(0); i++)
+    {   
+        for (int j = 0; j < ar2.GetLength(1); j++)
+        {
+            for (int x = 0; x < ar2.GetLength(1); x++)
+            {
+                result[i,j] += ar1[i,x] * ar2[x,j];
+            }
 
-// if (rows1 < 1 || cols1 < 1) Console.WriteLine("Numbers of rows & columns must be greater than 0");
-// else
-// {
-//     Console.WriteLine($"For the second matrix automatically: {cols1} rows and {rows1} columns");
-//     int[,] arr1 = Fill2dArray(rows1, cols1, min, max);
-//     Print2dArray(arr1);
-//     int[,] arr2 = Fill2dArray(cols1, rows1, min, max);
-//     Print2dArray(arr2);
-//     Print2dArray(MultiplyMatrix(arr1,arr2));
+        }
+    }
+    return result;
+}
 
-// }
+
+int min = 1;
+int max = 6;
+
+Console.Write("Enter size of matrix: ");
+int size = Convert.ToInt16(Console.ReadLine());
+
+
+if (size < 1) Console.WriteLine("Size must be greater than 0");
+else
+{
+    int[,] arr1 = Fill2dArray(size, min, max);
+    Console.WriteLine("1st matrix");
+    Print2dArray(arr1);
+    int[,] arr2 = Fill2dArray(size, min, max);
+    Console.WriteLine("2nd matrix");
+    Print2dArray(arr2);
+    Console.WriteLine("Result matrix");
+    Print2dArray(MultiplyMatrix(arr1,arr2));
+}
 
 
 
@@ -269,7 +272,7 @@
 //             }
 //             Console.WriteLine();
 //         }
-        
+
 //     }
 //     Console.WriteLine();
 // }
@@ -281,68 +284,69 @@
 // Print3dArray(Fill3dArray(a,b,c));
 
 
-// Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
-// Например, на выходе получается вот такой массив:
-// 01 02 03 04
-// 12 13 14 05
-// 11 16 15 06
-// 10 09 08 07
+// // Задача 62. Напишите программу, которая заполнит спирально массив 4 на 4.
+// // Например, на выходе получается вот такой массив:
+// // 01 02 03 04
+// // 12 13 14 05
+// // 11 16 15 06
+// // 10 09 08 07
 
-int[,] FillSpiralArray(int rows, int cols)
-{
-    int[,] array = new int[rows, cols];
-    int start = 101;
-    int count = 0;
-    
-    for (int i = 0+count; i < rows-count; i++)
-    {
-        for (int j = 0+count; j < cols-count; j++)
-        {
-            array[i,j] = start;
-            Console.WriteLine(array[i,j]+ " " + start + " " + i+ " " + j);
-            Console.WriteLine();
-            start++;
+// int[,] FillSpiralArray(int size)
+// {
+//     int[,] array = new int[size, size];
+//     int start = 11;
+//     int count = 1;
 
-            for (i = 1+count; i < rows-count-1; i++) //
-            {
-                array[i,j] = start;
-                start++;
-                
-                for ( j = cols-count-1; j >=0+count; j--)
-                {
-                    array[i,j] = start;
-                    start++;
-                   // count++;
-                   for (i = rows-count-1; i >= 0+count; i--)
-                   {
-                    array[i,j] = start;
-                    start++;
-                    count++;
-                   }
-                }
-                
-            }
-        }
-    }
-    return array;
-}
+//     while (count != size / 2 + 1)
+//     {
+//         for (int j = count - 1; j < size - count; j++)
+//         {
+//             int i = count - 1;
+//             array[i, j] = start;
+//             start++;
+//         }
+
+//         for (int i = count - 1; i < size - count; i++)
+//         {
+//             int j = size - count;
+//             array[i, j] = start;
+//             start++;
+//         }
+
+//         for (int j = size - count; j >= count; j--)
+//         {
+//             int i = size - count;
+//             array[i, j] = start;
+//             start++;
+//         }
+
+//         for (int i = size - count; i >= count; i--)
+//         {
+//             int j = count - 1;
+//             array[i, j] = start;
+//             start++;
+//         }
+
+//         count++;
+//     }
+//     return array;
+// }
 
 
 
-void Print2dArray(int[,] array)
-{
-    for (int i = 0; i < array.GetLength(0); i++)
-    {
-        for (int j = 0; j < array.GetLength(1); j++)
-        {
-            Console.Write($"{array[i, j]} ");
-        }
-        Console.WriteLine();
-    }
-    Console.WriteLine();
-}
+// void Print2dArray(int[,] array)
+// {
+//     for (int i = 0; i < array.GetLength(0); i++)
+//     {
+//         for (int j = 0; j < array.GetLength(1); j++)
+//         {
+//             Console.Write($"{array[i, j]} ");
+//         }
+//         Console.WriteLine();
+//     }
+//     Console.WriteLine();
+// }
 
-int rows = 4;
-int cols = 4;
+// int size = 8; // Любое четное число > 0
 
-Print2dArray(FillSpiralArray(rows, cols));
+// Print2dArray(FillSpiralArray(size));
